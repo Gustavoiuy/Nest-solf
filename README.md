@@ -20,6 +20,12 @@ $ npm install
 $ Abrir los scripts y dar click en actualizar.
 ```
 
+## Configuracion 
+
+1. Copiar el env.template y renombrarlo a .env
+
+2. Rellenar las variables de entorno
+
 ## Iniciar la app
 
 1. Abrir los scripts y ejecutar cualquier instruccion.
