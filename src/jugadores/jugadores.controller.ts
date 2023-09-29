@@ -6,15 +6,9 @@ import { PaginationDto } from 'src/common/dtos/pagination.dto';
 export class JugadoresController {
   constructor(private readonly jugadoresService: JugadoresService) {}
 
-
-  @Get()
-  findAll( @Query() paginationDto: PaginationDto) {
-    return this.jugadoresService.findAll(paginationDto);
-  }
-
-  @Get(':term')
-  findOne(@Param('term') term: string) {
-    return this.jugadoresService.findOne(term);
+  @Get(':id')
+  getJugadoresPorEquipo(@Param('id') id: string) {
+    return this.jugadoresService.getJugadoresPorEquipo(id);
   }
 
 }

@@ -4,6 +4,7 @@ import { EquipoController } from './equipo.controller';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Equipo, EquipoSchema } from './entities/equipo.entity';
+import { LigasModule } from 'src/ligas/ligas.module';
 
 @Module({
   controllers: [EquipoController],
@@ -16,6 +17,7 @@ import { Equipo, EquipoSchema } from './entities/equipo.entity';
         schema: EquipoSchema
       },
     ]),
+    LigasModule
   ]
 })
 export class EquipoModule {}

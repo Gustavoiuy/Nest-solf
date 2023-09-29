@@ -1,4 +1,4 @@
-import { Jugador, jugadorSchema } from './entities/jugadore.entity';
+import { Jugadores, jugadorSchema } from './entities/jugadores.entity';
 import { Module } from '@nestjs/common';
 import { JugadoresService } from './jugadores.service';
 import { JugadoresController } from './jugadores.controller';
@@ -7,6 +7,8 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { Liga, LigaSchema } from 'src/ligas/entities/ligas.entity';
 import { Equipo, EquipoSchema } from 'src/equipo/entities/equipo.entity';
 import { Usuario, UsuarioSchema } from 'src/ligas/entities/usuario.entity';
+import { LigasModule } from 'src/ligas/ligas.module';
+import { EquipoModule } from 'src/equipo/equipo.module';
 
 @Module({
   controllers: [JugadoresController],
@@ -14,24 +16,13 @@ import { Usuario, UsuarioSchema } from 'src/ligas/entities/usuario.entity';
   imports:[
     ConfigModule.forRoot(),
     MongooseModule.forFeature([
-     
       {
-        name: Liga.name,
-        schema: LigaSchema
-      },
-      {
-        name: Equipo.name,
-        schema: EquipoSchema
-      },
-      {
-        name: Jugador.name,
+        name: Jugadores.name,
         schema: jugadorSchema
-      },
-      {
-        name: Usuario.name,
-        schema: UsuarioSchema
-      },
+      }
     ]),
+    LigasModule,
+    EquipoModule
   ]
 })
 export class JugadoresModule {}

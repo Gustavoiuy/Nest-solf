@@ -1,58 +1,26 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-
-import { Jugador } from './entities/jugadore.entity';
-import { Model, isValidObjectId } from 'mongoose';
+import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
+
+import { Jugadores } from './entities/jugadores.entity';
+import { Model } from 'mongoose';
 import { PaginationDto } from 'src/common/dtos/pagination.dto';
 @Injectable()
 export class JugadoresService {
 
     constructor(
 
-        @InjectModel( Jugador.name  )
-        private readonly jugadorModel: Model<Jugador>
+        @InjectModel( Jugadores.name  )
+        private readonly jugadorModel: Model<Jugadores>
     
       ){}
 
-findAll( paginationDto: PaginationDto ) {
-    
-const { limite, desde } = paginationDto; 
-    
-return this.jugadorModel.find({"status":true})    
-               .limit( limite )
-               .skip( desde )
-    
+      getJugadoresPorEquipo( id: string ) {
+
+        return this.jugadorModel.find({"equipo":id,"status":true})
+
+
       }
 
-  async findOne(term: string) {
-    let jugador:Jugador;
-
-    if(!isNaN(+term)){
-        jugador = await this.jugadorModel.findOne({equipo:term});
-
-    }
-
-     //MongoID
-
-     if(!jugador && isValidObjectId(term)){
-        jugador = await this.jugadorModel.findById(term);
-    }
-
-    //name
-    
-    if(!jugador){
-
-        jugador = await this.jugadorModel.findOne({name:term})
-     }
-
-     if( !jugador)
-        throw new NotFoundException(`Jugador "${term}"no encontrado`)
-     
-   
-    return jugador;
-
-   
-  }
 
 
 }

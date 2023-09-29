@@ -5,7 +5,7 @@ import { Equipo } from "src/equipo/entities/equipo.entity";
 import { Document,Schema as MongooseSchema } from "mongoose";
 
 @Schema()
-export class Jugador extends Document {
+export class Jugadores extends Document {
 
     
     @Prop({ required:true })
@@ -31,15 +31,15 @@ export class Jugador extends Document {
 
 
     @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Usuario', required: true })
-    usuario: MongooseSchema.Types.ObjectId | Usuario;
+    usuario:  Usuario;
 
     @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Liga', required: true })
-    liga: MongooseSchema.Types.ObjectId | Liga;
+    liga:  Liga;
 
      @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Equipo', required: true })
-     equipo: MongooseSchema.Types.ObjectId | Equipo;
+     equipo:  Equipo;
    
 }
 
 
-export const jugadorSchema = SchemaFactory.createForClass( Jugador );
+export const jugadorSchema = SchemaFactory.createForClass( Jugadores );
