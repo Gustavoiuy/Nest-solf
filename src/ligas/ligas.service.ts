@@ -19,14 +19,15 @@ export class LigasService {
     
     const { limite, desde } = paginationDto; 
 
-    return this.ligaModel.find()
+    return this.ligaModel.find({"status":true})
             .populate('usuario', 'nombre aprellidoP apellidoM img')        
             .limit( limite )
             .skip( desde )
 
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} ligas`;
+  findOne(id: string) {
+    return this.ligaModel.findById(id)
+          .populate('usuario', 'nombre aprellidoP apellidoM img')        
   }
 }

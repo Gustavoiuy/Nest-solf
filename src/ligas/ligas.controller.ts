@@ -12,9 +12,10 @@ export class LigasController {
     return this.ligasService.findAll(paginationDto);
   }
 
+
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.ligasService.findOne(+id);
+    return this.ligasService.findOne(id);
   }
 
 
