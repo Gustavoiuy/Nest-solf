@@ -5,6 +5,7 @@ import { LigasModule } from './ligas/ligas.module';
 import { CommonModule } from './common/common.module';
 import { JugadoresModule } from './jugadores/jugadores.module';
 import { EquipoModule } from './equipo/equipo.module';
+import { EstadisticaJugadorModule } from './estadistica-jugador/estadistica-jugador.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { EquipoModule } from './equipo/equipo.module';
     CommonModule,
     JugadoresModule,
     EquipoModule,
+    EstadisticaJugadorModule,
   ],
   controllers: [],
   providers: [],
