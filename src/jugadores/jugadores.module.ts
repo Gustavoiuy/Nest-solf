@@ -5,7 +5,7 @@ import { JugadoresController } from './jugadores.controller';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Liga, LigaSchema } from 'src/ligas/entities/ligas.entity';
-import { Equipo, EquipoSchema } from 'src/equipo/entities/equipo.entity';
+import { Equipo, equipoSchema } from 'src/equipo/entities/equipo.entity';
 import { Usuario, UsuarioSchema } from 'src/ligas/entities/usuario.entity';
 import { LigasModule } from 'src/ligas/ligas.module';
 import { EquipoModule } from 'src/equipo/equipo.module';

@@ -14,8 +14,15 @@ export class EquipoController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.equipoService.findOne(+id);
+    return this.equipoService.findOne(id);
   }
+
+
+
+@Get('liga/:ligaId')
+findByLiga(@Param('ligaId') ligaId: string) {
+  return this.equipoService.findByLiga(ligaId);
+}
 
 
 }

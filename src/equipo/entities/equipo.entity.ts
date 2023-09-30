@@ -29,4 +29,4 @@ export class Equipo extends Document{
     liga: MongooseSchema.Types.ObjectId | Liga;
 
 }
-export const EquipoSchema = SchemaFactory.createForClass( Equipo );
+export const equipoSchema = SchemaFactory.createForClass( Equipo );
