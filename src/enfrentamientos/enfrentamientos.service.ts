@@ -22,4 +22,9 @@ export class EnfrentamientosService {
         return enfrentamientos;
       }
 
+      async findByEquipo(equipoId: string){
+
+        return this.enfrentamientosModel.find({ equipoLocal: equipoId  })
+      }
+
 }
