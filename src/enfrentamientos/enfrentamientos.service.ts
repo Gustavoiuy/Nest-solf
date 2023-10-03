@@ -17,7 +17,8 @@ export class EnfrentamientosService {
         return this.enfrentamientosModel.find({ liga: ligaId, "esActual":true })
                 .populate('liga', 'nombre')
                 .populate('equipoLocal', 'nombre img')
-                .populate('equipoVisitante', 'nombre img');
+                .populate('equipoVisitante', 'nombre img')
+                .populate('estadio', 'nombre img direccion');
       }
 
       findByEquipo(equipoId: string){
@@ -25,7 +26,8 @@ export class EnfrentamientosService {
         return this.enfrentamientosModel.find({ $or:[ {"equipoVisitante":equipoId} , {"equipoLocal":equipoId}], "esActual":true})
                   .populate('liga', 'nombre')
                   .populate('equipoLocal', 'nombre img')
-                  .populate('equipoVisitante', 'nombre img');
+                  .populate('equipoVisitante', 'nombre img')
+                  .populate('estadio', 'nombre img direccion');
       }
 
 }
