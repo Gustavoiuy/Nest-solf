@@ -24,7 +24,6 @@ export class Equipo extends Document{
     @Prop({ required:true })
     status:boolean
 
-   
     @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Liga', required: true })
     liga:  Liga;
 
