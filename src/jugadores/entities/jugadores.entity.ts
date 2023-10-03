@@ -13,7 +13,7 @@ export class Jugadores extends Document {
     
     @Prop({ required:true })
     apellidoP:string;
-      
+
     @Prop({ required:true })
     apellidoM:string;
 
@@ -36,9 +36,9 @@ export class Jugadores extends Document {
     @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Liga', required: true })
     liga:  Liga;
 
-     @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Equipo', required: true })
-     equipo:  Equipo;
-   
+    @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Equipo', required: true })
+    equipo:  Equipo;
+
 }
 
 

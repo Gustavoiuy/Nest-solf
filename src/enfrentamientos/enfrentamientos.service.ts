@@ -1,30 +1,31 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Enfrentamiento } from './entities/enfrentamiento.entity';
+import { Enfrentamientos} from './entities/enfrentamiento.entity';
 import { Model, Types } from 'mongoose';
 
 @Injectable()
 export class EnfrentamientosService {
     constructor(
 
-        @InjectModel( Enfrentamiento.name  )
-        private readonly enfrentamientosModel: Model<Enfrentamiento>
+        @InjectModel( Enfrentamientos.name  )
+        private readonly enfrentamientosModel: Model<Enfrentamientos>
     
       ){}
 
-    async findByLiga(ligaId: string) {
+    findByLiga(ligaId: string) {
 
-        const objectIdLigaId = new Types.ObjectId(ligaId);
-        const enfrentamientos = await this.enfrentamientosModel.find({ liga: objectIdLigaId });
-        if (!enfrentamientos || enfrentamientos.length === 0) {
-          throw new NotFoundException(`No se encontraron equipos para la liga con ID: ${ligaId}`);
-        }
-        return enfrentamientos;
+        return this.enfrentamientosModel.find({ liga: ligaId, "esActual":true })
+                .populate('liga', 'nombre')
+                .populate('equipoLocal', 'nombre img')
+                .populate('equipoVisitante', 'nombre img');
       }
 
-      async findByEquipo(equipoId: string){
+      findByEquipo(equipoId: string){
 
-        return this.enfrentamientosModel.find({ equipoLocal: equipoId  })
+        return this.enfrentamientosModel.find({ $or:[ {"equipoVisitante":equipoId} , {"equipoLocal":equipoId}], "esActual":true})
+                  .populate('liga', 'nombre')
+                  .populate('equipoLocal', 'nombre img')
+                  .populate('equipoVisitante', 'nombre img');
       }
 
 }

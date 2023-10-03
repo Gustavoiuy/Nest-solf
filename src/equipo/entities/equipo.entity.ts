@@ -1,9 +1,9 @@
-import { Prop, SchemaFactory } from "@nestjs/mongoose";
+import { Prop, Schema,SchemaFactory } from "@nestjs/mongoose";
 import { Usuario } from "src/ligas/entities/usuario.entity";
 import { Liga } from "src/ligas/entities/ligas.entity";
 import { Document,Schema as MongooseSchema } from "mongoose";
 
-
+@Schema()
 export class Equipo extends Document{
     @Prop({ required:true })
     nombre: string;
@@ -18,7 +18,7 @@ export class Equipo extends Document{
     descanso: boolean;
 
     @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Usuario', required: true })
-    usuario: MongooseSchema.Types.ObjectId | Usuario;
+    usuario:  Usuario;
 
     
     @Prop({ required:true })
@@ -26,7 +26,7 @@ export class Equipo extends Document{
 
    
     @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Liga', required: true })
-    liga: MongooseSchema.Types.ObjectId | Liga;
+    liga:  Liga;
 
 }
 export const equipoSchema = SchemaFactory.createForClass( Equipo );

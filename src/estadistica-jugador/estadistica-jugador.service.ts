@@ -9,8 +9,8 @@ export class EstadisticaJugadorService {
   constructor(
     @InjectModel( estadisticasJugadores.name  )
         private readonly EstadisticaJugadorModel: Model<estadisticasJugadores>
-
   ){}
+  
   findAll(idLiga:string) {
     return this.EstadisticaJugadorModel.find({"liga": idLiga, "esActual":true})
                         .populate('equipo','nombre img')
