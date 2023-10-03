@@ -3,7 +3,7 @@ import { Liga } from "src/ligas/entities/ligas.entity";
 import { Document,Schema as MongooseSchema } from "mongoose";
 import { Jugadores } from "src/jugadores/entities/jugadores.entity";
 import { Equipo } from "src/equipo/entities/equipo.entity";
-import { Estadio } from "./estadios.entity";
+import { Estadios } from "./estadios.entity";
 
 class CambioJugador extends Document {
 
@@ -55,8 +55,8 @@ export class Enfrentamientos extends Document {
 
     fechaDeEnfrentamiento:Date
     
-    @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Estadio', required: true })
-    estadio: Estadio;
+    @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Estadios', required: true })
+    estadio: Estadios;
 
     estadisticas: EstadisticasEnfrentamiento
     
