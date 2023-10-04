@@ -3,7 +3,7 @@ import { EstadisticaJugadorService } from './estadistica-jugador.service';
 import { EstadisticaJugadorController } from './estadistica-jugador.controller';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
-import { estadisticaJugadoSchema, estadisticasJugadores } from './entities/estadistica-jugador.entity';
+import { estadisticaJugadorSchema, estadisticasJugadores } from './entities/estadistica-jugador.entity';
 
 @Module({
   controllers: [EstadisticaJugadorController],
@@ -14,7 +14,7 @@ import { estadisticaJugadoSchema, estadisticasJugadores } from './entities/estad
     MongooseModule.forFeature([
       {
         name: estadisticasJugadores.name,
-        schema: estadisticaJugadoSchema
+        schema: estadisticaJugadorSchema
       }
     ]),
   ]

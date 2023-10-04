@@ -4,7 +4,7 @@ import { Equipo } from "src/equipo/entities/equipo.entity";
 import { Jugadores } from "src/jugadores/entities/jugadores.entity";
 import { Document,Schema as MongooseSchema } from "mongoose";
 
-@Schema()
+@Schema({ collection: 'estadisticasJugadores' })
 export class estadisticasJugadores extends Document {
 
     @Prop({ default:0 })
@@ -23,18 +23,18 @@ export class estadisticasJugadores extends Document {
     esActual:boolean
 
     
-    @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Liga', required: true })
+    @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Jugadores', required: true })
     jugador:  Jugadores;
 
 
     @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Liga', required: true })
     liga:  Liga;
 
-     @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Equipo', required: true })
-     equipo:  Equipo;
+    @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Equipo', required: true })
+    equipo:  Equipo;
 
 
     
 }
 
-export const estadisticaJugadoSchema = SchemaFactory.createForClass( estadisticasJugadores );
+export const estadisticaJugadorSchema = SchemaFactory.createForClass( estadisticasJugadores );
