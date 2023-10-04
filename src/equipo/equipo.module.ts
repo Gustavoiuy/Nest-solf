@@ -21,8 +21,7 @@ import { Liga, LigaSchema } from '../ligas/entities/ligas.entity';
         name: Liga.name,
         schema: LigaSchema
       },
-    ]),
-    LigasModule
+    ])
   ]
 })
 export class EquipoModule {}
