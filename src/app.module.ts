@@ -7,6 +7,7 @@ import { JugadoresModule } from './jugadores/jugadores.module';
 import { EquipoModule } from './equipo/equipo.module';
 import { EstadisticaJugadorModule } from './estadistica-jugador/estadistica-jugador.module';
 import { EnfrentamientosModule } from './enfrentamientos/enfrentamientos.module';
+import { PosicionesPorLigaModule } from './posiciones-por-liga/posiciones-por-liga.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { EnfrentamientosModule } from './enfrentamientos/enfrentamientos.module'
     EquipoModule,
     EstadisticaJugadorModule,
     EnfrentamientosModule,
+    PosicionesPorLigaModule,
   ],
   controllers: [],
   providers: [],
