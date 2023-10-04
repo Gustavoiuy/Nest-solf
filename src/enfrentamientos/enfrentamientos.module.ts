@@ -3,8 +3,7 @@ import { EnfrentamientosService } from './enfrentamientos.service';
 import { EnfrentamientosController } from './enfrentamientos.controller';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
-import { Enfrentamientos, EnfrentamientoSchema } from './entities/enfrentamiento.entity';
-import { Estadios, EstadioSchema } from './entities/estadios.entity';
+import { Enfrentamiento, EnfrentamientoSchema } from './entities/enfrentamiento.entity';
 
 @Module({
   controllers: [EnfrentamientosController],
@@ -13,12 +12,8 @@ import { Estadios, EstadioSchema } from './entities/estadios.entity';
     ConfigModule.forRoot(),
     MongooseModule.forFeature([
       {
-        name: Enfrentamientos.name,
+        name: Enfrentamiento.name,
         schema: EnfrentamientoSchema
-      },
-      {
-        name: Estadios.name,
-        schema: EstadioSchema
       }
     ])
 ]

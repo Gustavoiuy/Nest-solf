@@ -24,7 +24,7 @@ export class Liga extends Document {
     img: string;
 
     @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Usuario', required: true })
-    usuario:  Usuario;
+    usuario: MongooseSchema.Types.ObjectId | Usuario;
 }
 
 export const LigaSchema = SchemaFactory.createForClass( Liga );

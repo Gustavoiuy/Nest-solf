@@ -20,7 +20,9 @@ import { EquipoModule } from 'src/equipo/equipo.module';
         name: Jugadores.name,
         schema: jugadorSchema
       }
-    ])
+    ]),
+    LigasModule,
+    EquipoModule
   ]
 })
 export class JugadoresModule {}

@@ -13,10 +13,6 @@ findByLiga(@Param('ligaId') ligaId: string) {
   return this.enfrentamientosService.findByLiga(ligaId);
 }
 
-@Get('equipo/:equipoId')
-findByEquipo(@Param('equipoId') equipoId: string) {
-  return this.enfrentamientosService.findByEquipo(equipoId);
-}
 
 
 }

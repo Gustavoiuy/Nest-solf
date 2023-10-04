@@ -1,26 +1,27 @@
-import { Prop, SchemaFactory,Schema } from "@nestjs/mongoose";
+import { Prop, SchemaFactory } from "@nestjs/mongoose";
+import { Usuario } from "src/ligas/entities/usuario.entity";
 import { Liga } from "src/ligas/entities/ligas.entity";
 import { Document,Schema as MongooseSchema } from "mongoose";
 import { Jugadores } from "src/jugadores/entities/jugadores.entity";
 import { Equipo } from "src/equipo/entities/equipo.entity";
-import { Estadios } from "./estadios.entity";
+import { Estadio } from "./estadios.entity";
 
-class CambioJugador extends Document {
-
+export class CambioJugador extends Document {
+     
     @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Jugadores', required: true })
-    jugadorEntra:  Jugadores;
-
-    @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Jugadores', required: true })
-    jugadorSale: Jugadores;
+    jugadorEntra: MongooseSchema.Types.ObjectId | Jugadores;
+       
+     @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Jugadores', required: true })
+     jugadorSale: MongooseSchema.Types.ObjectId | Jugadores;
 
 }
 
-class EstadisticasJugador extends Document {
-    @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Jugadores', required: true })
-    jugador: Jugadores;
+export class EstadisticasJugador extends Document {
+     @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Jugadores', required: true })
+     jugador: MongooseSchema.Types.ObjectId | Jugadores;
 
-    @Prop({ default:0 })
-    faltas:number
+     @Prop({ default:0 })
+     faltas:number
 
     @Prop({ default:0 })
     goles:number
@@ -30,74 +31,78 @@ class EstadisticasJugador extends Document {
 
     cambios: [CambioJugador]
 
-}
+    }
+    export class EstadisticasEnfrentamiento extends Document {
 
-@Schema()
-export class Enfrentamientos extends Document {
+         @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Enfrentamiento', required: true })
+         enfrentamiento: MongooseSchema.Types.ObjectId | Enfrentamiento;
+        
+        
+        @Prop({ default:0 })
+           totalGolesLocal:number
 
-    @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Liga', required: true })
-    liga: Liga;
+        @Prop({ default:0 })
+        totalAutogolesLocal: number
 
-    @Prop({required: true })
-    jornada: number
 
-    @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Equipo', required: true })
-    equipoLocal: Equipo;
+        @Prop({ default:0 })
+        totalFaltasLocal:number
+
+
+
+        @Prop({ default:0 })
+        malUniformadosLocal: number
+
+        @Prop({ default:0 })
+        totalGolesVisitante: number
+
+        @Prop({ default:0 })
+        totalAutogolesVisitante: number
+
+        @Prop({ default:0 })
+        totalFaltasVisitante: number
+
+        @Prop({ default:0 })
+        malUniformadosVisitante: number
+        
+        estadisticasJugadores: [EstadisticasJugador] // Array de estadísticas de jugadores
+        // Puedes agregar más campos de estadísticas generales del enfrentamiento aquí
     
-    @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Equipo', required: true })
-    equipoVisitante: Equipo;
+    }
 
-    @Prop({required: true })
-    fechaDeGeneracion: Date
+    export class  Enfrentamiento extends Document {
 
-    @Prop({ default:0 })
-    esActual:boolean
-
-    fechaDeEnfrentamiento:Date
+        @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Liga', required: true })
+        liga: MongooseSchema.Types.ObjectId | Liga;
     
-    @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Estadios', required: true })
-    estadio: Estadios;
+        jornada: number
 
-    estadisticas: EstadisticasEnfrentamiento
+         @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Equipo', required: true })
+         equipoLocal:MongooseSchema.Types.ObjectId | Equipo;
+        
+        @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Equipo', required: true })
+        equipoVisitante:MongooseSchema.Types.ObjectId | Equipo;
+
+        fechaDeGeneracion: Date
+
+        @Prop({ default:0 })
+        esActual:boolean
     
-}
-
-class EstadisticasEnfrentamiento extends Document {
-
-    @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Enfrentamiento', required: true })
-    enfrentamiento: Enfrentamientos;
+        fechaDeEnfrentamiento:Date
+        
+        @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Estadio', required: true })
+        estadio:MongooseSchema.Types.ObjectId | Estadio;
     
-    
-    @Prop({ default:0 })
-    totalGolesLocal:number
+        estadisticas: EstadisticasEnfrentamiento
+        
+    }
 
-    @Prop({ default:0 })
-    totalAutogolesLocal: number
+    export const EstadisticasJugadorSchema = SchemaFactory.createForClass( EstadisticasJugador );
 
+    export const CambioJugadorSchema = SchemaFactory.createForClass( CambioJugador );
 
-    @Prop({ default:0 })
-    totalFaltasLocal:number
+    export const EnfrentamientoSchema = SchemaFactory.createForClass( Enfrentamiento );
 
-    @Prop({ default:0 })
-    malUniformadosLocal: number
-
-    @Prop({ default:0 })
-    totalGolesVisitante: number
-
-    @Prop({ default:0 })
-    totalAutogolesVisitante: number
-
-    @Prop({ default:0 })
-    totalFaltasVisitante: number
-
-    @Prop({ default:0 })
-    malUniformadosVisitante: number
-    
-    estadisticasJugadores: [EstadisticasJugador] // Array de estadísticas de jugadores
-    // Puedes agregar más campos de estadísticas generales del enfrentamiento aquí
-
-}
-
-export const EnfrentamientoSchema = SchemaFactory.createForClass( Enfrentamientos );
+    export const EstadisticasEnfrentamientoSchema = SchemaFactory.createForClass( EstadisticasEnfrentamiento );
 
 

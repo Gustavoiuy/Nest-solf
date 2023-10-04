@@ -14,31 +14,35 @@ export class EquipoService {
 
   ){}
 
-  findAll( paginationDto: PaginationDto ) {
-  
-      const { limite, desde } = paginationDto; 
-  
-      return this.equipoModel.find({"status":true})
-              .populate('usuario', 'nombre aprellidoP apellidoM img')
-              .populate('liga', 'nombre descripcion img')
-              .limit( limite )
-              .skip( desde )
-  
-    }
-  
-  findOne(id: string) {
-      return this.equipoModel.findById(id)
-            .populate('liga', 'nombre descripcion img')
-            .populate('usuario', 'nombre aprellidoP apellidoM img');
+    findAll( paginationDto: PaginationDto ) {
     
+        const { limite, desde } = paginationDto; 
+    
+        return this.equipoModel.find({"status":true})
+                           
+                .limit( limite )
+                .skip( desde )
+    
+      }
+
+ 
+  
+  async findOne(id: string) {
+    const equipo = await this.equipoModel.findById(id).exec();
+    if (!equipo) {
+      throw new NotFoundException(`No se encontró el equipo con ID: ${id}`);
+    }
+    return equipo;
   }
   
-  findByLiga(ligaId: string) {
+  async findByLiga(ligaId: string) {
 
-      return this.equipoModel.find({ liga: ligaId,"status":true })
-              .populate('liga', 'nombre descripcion img')
-              .populate('usuario', 'nombre aprellidoP apellidoM img');
-  
+    const objectIdLigaId = new Types.ObjectId(ligaId);
+    const equipos = await this.equipoModel.find({ liga: objectIdLigaId });
+    if (!equipos || equipos.length === 0) {
+      throw new NotFoundException(`No se encontraron equipos para la liga con ID: ${ligaId}`);
+    }
+    return equipos;
   }
   
   
