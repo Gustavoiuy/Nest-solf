@@ -12,7 +12,7 @@ export class TablaPosicionesController {
 //   }
   @Get('liga/:ligaId')
 findAll(@Param('ligaId') ligaId: string) {
-  console.log('ligaId:', ligaId); // Verifica si ligaId se está capturando correctamente
+  //console.log('ligaId:', ligaId); // Verifica si ligaId se está capturando correctamente
   return this.tablaPosicionesService.getTablaPorLiga(ligaId);
 }
 
