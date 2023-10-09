@@ -36,18 +36,23 @@ export class TablaPosicionesService {
   }
 
   async getTablaPosicionesPorEquipo(equipoId: string) {
-    try {
+    try { 
       // Realiza la consulta para obtener la tabla de posiciones del equipo
-      const tablaPosiciones = await this.tablaPosicionModel
-        .find({ 'posiciones.equipo': equipoId })
+      const posiciones = await this.tablaPosicionModel
+        .findOne({ 'posiciones.equipo': equipoId })
+        .select('posiciones')
         .populate({
           path: 'posiciones.equipo',
           model: 'Equipo',
           select: 'nombre',
         })
         .exec();
+        if (!posiciones) {
+            // Maneja el caso en que no se encuentren posiciones para la liga
+            return null; // O puedes lanzar una excepción o manejarlo de otra manera
+          }
 
-      return tablaPosiciones;
+      return posiciones.posiciones;
     } catch (error) {
       // Maneja los errores si ocurren
       throw error;
