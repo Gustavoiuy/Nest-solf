@@ -35,6 +35,25 @@ export class TablaPosicionesService {
     }
   }
 
+  async getTablaPosicionesPorEquipo(equipoId: string) {
+    try {
+      // Realiza la consulta para obtener la tabla de posiciones del equipo
+      const tablaPosiciones = await this.tablaPosicionModel
+        .find({ 'posiciones.equipo': equipoId })
+        .populate({
+          path: 'posiciones.equipo',
+          model: 'Equipo',
+          select: 'nombre',
+        })
+        .exec();
+
+      return tablaPosiciones;
+    } catch (error) {
+      // Maneja los errores si ocurren
+      throw error;
+    }
+  }
+
 
 
   
