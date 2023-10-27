@@ -8,9 +8,11 @@ import { EquipoModule } from './equipo/equipo.module';
 import { EstadisticaJugadorModule } from './estadistica-jugador/estadistica-jugador.module';
 import { EnfrentamientosModule } from './enfrentamientos/enfrentamientos.module';
 import { TablaPosicionesModule } from './tabla-posiciones/tabla-posiciones.module';
+import { MetricsModule } from './metrics/metrics.module';
 
 @Module({
   imports: [
+   
     ConfigModule.forRoot(),
     MongooseModule.forRoot(process.env.MONGO_URI, {
       dbName: process.env.MONGO_DB_NAME
@@ -22,6 +24,7 @@ import { TablaPosicionesModule } from './tabla-posiciones/tabla-posiciones.modul
     EstadisticaJugadorModule,
     EnfrentamientosModule,
     TablaPosicionesModule,
+    MetricsModule
   ],
   controllers: [],
   providers: [],
