@@ -9,7 +9,11 @@ import { EstadisticaJugadorModule } from './estadistica-jugador/estadistica-juga
 import { EnfrentamientosModule } from './enfrentamientos/enfrentamientos.module';
 import { TablaPosicionesModule } from './tabla-posiciones/tabla-posiciones.module';
 import { MetricsModule } from './metrics/metrics.module';
+<<<<<<< Updated upstream
 import { AuthModule } from './auth/auth.module';
+=======
+import { PaymentsModule } from './payments/payments.module';
+>>>>>>> Stashed changes
 
 @Module({
   imports: [
@@ -26,7 +30,11 @@ import { AuthModule } from './auth/auth.module';
     EnfrentamientosModule,
     TablaPosicionesModule,
     MetricsModule,
+<<<<<<< Updated upstream
     AuthModule
+=======
+    PaymentsModule
+>>>>>>> Stashed changes
   ],
   controllers: [],
   providers: [],
