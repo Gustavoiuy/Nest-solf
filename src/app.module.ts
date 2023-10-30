@@ -9,6 +9,7 @@ import { EstadisticaJugadorModule } from './estadistica-jugador/estadistica-juga
 import { EnfrentamientosModule } from './enfrentamientos/enfrentamientos.module';
 import { TablaPosicionesModule } from './tabla-posiciones/tabla-posiciones.module';
 import { MetricsModule } from './metrics/metrics.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -24,7 +25,8 @@ import { MetricsModule } from './metrics/metrics.module';
     EstadisticaJugadorModule,
     EnfrentamientosModule,
     TablaPosicionesModule,
-    MetricsModule
+    MetricsModule,
+    AuthModule
   ],
   controllers: [],
   providers: [],
