@@ -28,10 +28,12 @@
     "class-validator": "^0.14.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^7.5.1",
+    "nestjs-stripe": "^1.0.0",
     "prom-client": "^15.0.0",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.1",
-    "shortid": "^2.2.16"
+    "shortid": "^2.2.16",
+    "stripe": "^14.2.0"
   },
   "devDependencies": {
     "@nestjs/cli": "^10.0.0",

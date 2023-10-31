@@ -5,10 +5,11 @@ import { PaymentsController } from './payments.controller';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Payment, PaymentSchema } from './entities/payment.entity';
+import { StripeService } from './stripe/stripe.service';
 
 @Module({
   controllers: [PaymentsController],
-  providers: [PaymentsService,],
+  providers: [PaymentsService, StripeService,],
   imports:[
     ConfigModule.forRoot(),
     MongooseModule.forFeature([

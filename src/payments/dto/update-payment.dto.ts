@@ -6,4 +6,5 @@ export class UpdatePaymentDto extends PartialType(CreatePaymentDto) {
     readonly name?: string;
     readonly amount?: number;
     readonly status?: string;
+    readonly token?: string;
 }
