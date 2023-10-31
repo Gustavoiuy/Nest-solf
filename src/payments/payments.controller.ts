@@ -26,9 +26,10 @@ export class PaymentsController {
   }
 
   @Patch(':id')
-  updateItem(@Param('id') id: string, @Body() updatePaymentDto: UpdatePaymentDto) {
-    return this.paymentsService.updatePaymentIntent(id, updatePaymentDto.token);
+  updateItem(@Param('id') id: string, @Body('token') token: string) {
+    return this.paymentsService.updatePaymentIntent(id, token);
   }
+  
 
   @Patch('/confirm/:id')
   checkItem(@Param('id') id: string) {

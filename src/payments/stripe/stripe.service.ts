@@ -32,7 +32,7 @@ export class StripeService {
           payment_method: token,
         });
     
-        console.log(paymentIntent);
+        
     
         return paymentIntent;
       }

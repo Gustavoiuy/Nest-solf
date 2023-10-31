@@ -6,7 +6,8 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Payment } from './entities/payment.entity';
 import {Stripe} from 'stripe'
-const { generatePaymentIntent, generatePaymentMethod, getPaymentDetail } = require('./stripe/stripe.service')
+import { StripeService } from './stripe/stripe.service';
+
 const stripe = new Stripe(process.env.STRIPE_SK)
 
 @Injectable()
@@ -15,6 +16,7 @@ export class PaymentsService {
 
     constructor(@InjectModel(Payment.name)
      private readonly PayModel: Model<Payment>,
+     private readonly stripeService: StripeService
      ) {}
 //Crear Orden
  async create(createPaymentDto: CreatePaymentDto) {
@@ -46,24 +48,26 @@ export class PaymentsService {
 }
 
 
-async updatePaymentIntent(localizator: string, token: string) {
+async updatePaymentIntent(id: string, token: string) {
     try {
       // Buscamos la orden en nuestra base de datos
-      const resOrder = await this.PayModel.findOne({ localizator });
+      const resOrder = await this.PayModel.findOne({ localizator:id });
 
       // Generamos el método de pago en Stripe
-      const responseMethod = await generatePaymentMethod(token);
+      const responseMethod = await this.stripeService.generatePaymentMethod(token);
 
       // Generamos la intención de pago
-      const resPaymentIntent = await generatePaymentIntent(
-        resOrder.amount,
-        resOrder.name,
-        responseMethod.id,
-      );
+      const paymentIntentData = {
+        amount: resOrder.amount,
+        user: resOrder.name,
+        payment_method: responseMethod.id,
+      };
+console.log(paymentIntentData)
+      const resPaymentIntent = await this.stripeService.generatePaymentIntent(paymentIntentData);
 
       // Actualizamos la orden con el ID de la intención de pago en la base de datos
       await this.PayModel.updateOne(
-        { localizator },
+        { localizator:id },
         { stripeId: resPaymentIntent.id },
       );
 
@@ -73,6 +77,7 @@ async updatePaymentIntent(localizator: string, token: string) {
       throw new Error('Algo ocurrió');
     }
   }
+
   
 
   
@@ -89,7 +94,7 @@ async checkItem(localizator: string) {
       }
 
       // Solicitamos a Stripe que nos devuelva la información de la orden
-      const detailStripe = await getPaymentDetail(resOrder.stripeId);
+      const detailStripe = await this.stripeService.getPaymentDetail(resOrder.stripeId);
 
       // Determinamos el estado de la orden
       const status = detailStripe.status.includes('succe') ? 'success' : 'fail';

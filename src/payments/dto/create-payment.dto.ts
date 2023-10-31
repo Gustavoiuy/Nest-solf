@@ -8,4 +8,5 @@ export class CreatePaymentDto {
     @IsNumber()
     readonly amount: number;
    
+  
 }
