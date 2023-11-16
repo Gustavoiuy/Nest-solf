@@ -18,5 +18,9 @@
                 "DELETE"
             ]
         }
-    ]
+    ],
+    "hooks": {
+        "prebuild": "npm install",
+        "postbuild": "npm run build"
+      }
 }
