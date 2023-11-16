@@ -13,15 +13,21 @@ import { MetricsModule } from './metrics/metrics.module';
 import { AuthModule } from './auth/auth.module';
 
 import { PaymentsModule } from './payments/payments.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
 
 @Module({
   imports: [
    
     ConfigModule.forRoot(),
+    ServeStaticModule.forRoot({
+        rootPath: join(__dirname,'..','public'),
+        }),
     MongooseModule.forRoot(process.env.MONGO_URI, {
       dbName: process.env.MONGO_DB_NAME
     }),
+    
     LigasModule,
     CommonModule,
     JugadoresModule,
