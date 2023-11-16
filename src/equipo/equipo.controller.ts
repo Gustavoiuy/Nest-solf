@@ -1,8 +1,9 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query, UseInterceptors } from '@nestjs/common';
 import { EquipoService } from './equipo.service';
 import { PaginationDto } from 'src/common/dtos/pagination.dto';
 
 @Controller('equipo')
+
 export class EquipoController {
   constructor(private readonly equipoService: EquipoService) {}
 

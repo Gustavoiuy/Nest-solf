@@ -10,7 +10,7 @@ import { Liga, LigaSchema } from '../ligas/entities/ligas.entity';
 @Module({
   controllers: [EquipoController],
   providers: [EquipoService],
-  imports:[
+  imports:[ 
     ConfigModule.forRoot(),
     MongooseModule.forFeature([
       {
