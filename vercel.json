@@ -19,8 +19,8 @@
             ]
         }
     ],
-    "hooks": {
-        "prebuild": "npm install",
-        "postbuild": "npm run build"
-      }
+    
+        "installCommand": "npm install --force"
+      
+   
 }
