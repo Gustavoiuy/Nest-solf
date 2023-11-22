@@ -21,7 +21,7 @@ export class StripeService {
           currency: process.env.STRIPE_CURRENCY,
           payment_method_types: ['card'],
           payment_method,
-          description: `Pago para la gente de Youtue -> ${user}: Pago`,
+          description: `Pago de Paquete Solf --> ${user}: Pago`,
         });
     
         return resPaymentIntent;
