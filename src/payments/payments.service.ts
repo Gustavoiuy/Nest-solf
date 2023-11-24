@@ -74,6 +74,8 @@ console.log(paymentIntentData)
         { stripeId: resPaymentIntent.id },
       );
 
+      
+
       return resPaymentIntent;
     } catch (e) {
       console.log(e.message);
@@ -101,11 +103,11 @@ console.log(paymentIntentData)
       // Actualizamos nuestra orden con el estado
       await this.PayModel.updateOne({ localizator }, { status });
 
-      if (detailStripe.amount === 200 ){
+      if (resOrder.amount === 200 ){
         await this.actualizarLigasDisp( resOrder.userId, 10);
-      }else if( detailStripe.amount === 100 ){
+      }else if( resOrder.amount === 100 ){
         await this.actualizarLigasDisp(resOrder.userId, 6);
-      }else if( detailStripe.amount === 50 ){
+      }else if( resOrder.amount === 50 ){
         await this.actualizarLigasDisp(resOrder.userId, 3);
       }
 
