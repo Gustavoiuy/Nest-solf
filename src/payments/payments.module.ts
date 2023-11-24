@@ -6,7 +6,7 @@ import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Payment, PaymentSchema } from './entities/payment.entity';
 import { StripeService } from './stripe/stripe.service';
-import { AuthModule } from 'src/auth/auth.module';
+import { Usuario, UsuarioSchema } from './entities/usuario.entity';
 
 @Module({
   controllers: [PaymentsController],
@@ -17,9 +17,12 @@ import { AuthModule } from 'src/auth/auth.module';
       {
         name: Payment.name,
         schema: PaymentSchema
+      },
+      {
+        name: Usuario.name,
+        schema: UsuarioSchema
       }
     ]),
-    AuthModule
   ]
 })
 export class PaymentsModule {}

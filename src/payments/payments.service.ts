@@ -7,7 +7,7 @@ import { Model } from 'mongoose';
 import { Payment } from './entities/payment.entity';
 import {Stripe} from 'stripe'
 import { StripeService } from './stripe/stripe.service';
-import { Usuario } from 'src/auth/entities/usuario.entity';
+import { Usuario } from './entities/usuario.entity';
 
 const stripe = new Stripe(process.env.STRIPE_SK)
 
