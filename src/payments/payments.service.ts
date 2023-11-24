@@ -83,10 +83,6 @@ console.log(paymentIntentData)
 
   
 
-  
-
-
-   
   async checkItem(localizator: string) {
     try {
       // Buscamos la orden en nuestra base de datos
