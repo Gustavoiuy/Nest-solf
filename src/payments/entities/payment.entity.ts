@@ -26,10 +26,8 @@ export class Payment extends Document {
     @Prop({enum: ['success', 'fail', 'wait'], default: 'wait' })
     status: string;
 
-    @Prop()
-    idMongo: string;
-
-
+    @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Usuario' })
+    userId: string;
 
 }
 

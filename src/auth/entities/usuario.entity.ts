@@ -39,6 +39,8 @@ export class Usuario extends Document {
     @Prop({ required: true, default: false  })
     google: boolean;
 
+    @Prop({ default: 1 })
+    ligasDisp: number
 
 }
 

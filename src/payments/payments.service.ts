@@ -7,6 +7,7 @@ import { Model } from 'mongoose';
 import { Payment } from './entities/payment.entity';
 import {Stripe} from 'stripe'
 import { StripeService } from './stripe/stripe.service';
+import { Usuario } from 'src/auth/entities/usuario.entity';
 
 const stripe = new Stripe(process.env.STRIPE_SK)
 
@@ -15,17 +16,19 @@ const stripe = new Stripe(process.env.STRIPE_SK)
 export class PaymentsService {
 
     constructor(@InjectModel(Payment.name)
-     private readonly PayModel: Model<Payment>,
-     private readonly stripeService: StripeService
-     ) {}
+      private readonly PayModel: Model<Payment>,
+      private readonly stripeService: StripeService,
+      @InjectModel( Usuario.name  )
+      private usuarioModel: Model<Usuario>
+    ) {}
 //Crear Orden
- async create(createPaymentDto: CreatePaymentDto) {
+  async create(createPaymentDto: CreatePaymentDto) {
 
     try {
-        const { name, amount } = createPaymentDto;
-        const order = new this.PayModel({ name, amount });
-         await order.save();
-         return order
+        const { name, amount, userId } = createPaymentDto;
+        const order = new this.PayModel({ name, amount, userId  });
+          await order.save();
+          return order
       } catch (error) {
         throw error;
       }
@@ -84,7 +87,7 @@ console.log(paymentIntentData)
 
 
    
-async checkItem(localizator: string) {
+  async checkItem(localizator: string) {
     try {
       // Buscamos la orden en nuestra base de datos
       const resOrder = await this.PayModel.findOne({ localizator });
@@ -102,6 +105,14 @@ async checkItem(localizator: string) {
       // Actualizamos nuestra orden con el estado
       await this.PayModel.updateOne({ localizator }, { status });
 
+      if (detailStripe.amount === 200 ){
+        await this.actualizarLigasDisp( resOrder.userId, 10);
+      }else if( detailStripe.amount === 100 ){
+        await this.actualizarLigasDisp(resOrder.userId, 6);
+      }else if( detailStripe.amount === 50 ){
+        await this.actualizarLigasDisp(resOrder.userId, 3);
+      }
+
       return detailStripe;
     } catch (e) {
       console.log(e.message);
@@ -109,5 +120,27 @@ async checkItem(localizator: string) {
     }
   }
 
- 
+
+  private async actualizarLigasDisp(userId: string, cantidad: number) {
+    try {
+      // Buscar el usuario por su ID
+      const usuario = await this.usuarioModel.findById(userId);
+
+      if (!usuario) {
+        throw new Error('Usuario no encontrado');
+      }
+
+      // Actualizar ligasDisp
+      usuario.ligasDisp += cantidad;
+
+      // Guardar los cambios en la base de datos
+      await usuario.save();
+    } catch (error) {
+      console.error(error.message);
+      throw new Error('Error al actualizar ligasDisp');
+    }
+  }
+
+
+
 }
