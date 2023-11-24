@@ -6,6 +6,7 @@ import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Payment, PaymentSchema } from './entities/payment.entity';
 import { StripeService } from './stripe/stripe.service';
+import { AuthModule } from 'src/auth/auth.module';
 
 @Module({
   controllers: [PaymentsController],
@@ -17,9 +18,8 @@ import { StripeService } from './stripe/stripe.service';
         name: Payment.name,
         schema: PaymentSchema
       }
-    ])
+    ]),
+    AuthModule
   ]
 })
-export class PaymentsModule {
-
-}
+export class PaymentsModule {}
