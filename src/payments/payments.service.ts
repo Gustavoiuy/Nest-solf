@@ -100,10 +100,11 @@ console.log(paymentIntentData)
 
       // Actualizamos nuestra orden con el estado
       await this.PayModel.updateOne({ localizator }, { status });
-
+      console.log('Antes de iniciar el if');
       if (detailStripe.amount === 200 ){
         await this.actualizarLigasDisp( resOrder.userId, 10);
       }else if( detailStripe.amount === 100 ){
+        console.log('si llegue al cien');
         await this.actualizarLigasDisp(resOrder.userId, 6);
       }else if( detailStripe.amount === 50 ){
         await this.actualizarLigasDisp(resOrder.userId, 3);
