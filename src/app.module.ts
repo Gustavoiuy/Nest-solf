@@ -13,6 +13,7 @@ import { MetricsModule } from './metrics/metrics.module';
 import { AuthModule } from './auth/auth.module';
 
 import { PaymentsModule } from './payments/payments.module';
+import { EncuestaModule } from './encuesta/encuesta.module';
 
 
 @Module({
@@ -32,7 +33,8 @@ import { PaymentsModule } from './payments/payments.module';
     MetricsModule,
 
     AuthModule,
-    PaymentsModule
+    PaymentsModule,
+    EncuestaModule
 
   ],
   controllers: [],
