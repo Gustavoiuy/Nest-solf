@@ -26,6 +26,9 @@ export class Payment extends Document {
     @Prop({enum: ['success', 'fail', 'wait'], default: 'wait' })
     status: string;
 
+    @Prop()
+    idMongo: string;
+
 
 
 }

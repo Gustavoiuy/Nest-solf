@@ -8,5 +8,7 @@ export class CreatePaymentDto {
     @IsNumber()
     readonly amount: number;
    
+    @IsString()
+    readonly idMongo: string;
   
 }
