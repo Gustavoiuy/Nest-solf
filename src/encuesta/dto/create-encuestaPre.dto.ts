@@ -1,6 +1,6 @@
 import { IsString, MinLength } from "class-validator";
 
-export class CreateEncuestaDto {
+export class CreateEncuestaPreDto {
 
     @MinLength(3)
     @IsString()

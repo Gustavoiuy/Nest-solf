@@ -1,9 +1,7 @@
-import { Injectable } from '@nestjs/common';
-import { CreateEncuestaDto } from './dto/create-encuesta.dto';
-import { UpdateEncuestaDto } from './dto/update-encuesta.dto';
+import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { Encuesta } from './entities/encuesta.entity';
+import { EncuestaPre } from './entities/encuestaPre.entity';
 import { EncuestaRes } from './entities/encuestaRes.entity';
 import { CreateEncuestaResDto } from './dto/create-encuestaRes.dto';
 
@@ -11,35 +9,35 @@ import { CreateEncuestaResDto } from './dto/create-encuestaRes.dto';
 export class EncuestaService {
 
   constructor(
-    @InjectModel( Encuesta.name )
-    private readonly preguntaModel: Model<Encuesta>,
+    @InjectModel( EncuestaPre.name )
+    private readonly preguntaModel: Model<EncuestaPre>,
     @InjectModel( EncuestaRes.name )
     private readonly respuestaModel: Model<EncuestaRes>,
 
   ){}
 
+  async createRespuesta(createEncuestaResDto: CreateEncuestaResDto) {
 
-  createPregunta(createEncuestaDto: CreateEncuestaDto) {
-    return 'This action adds a new encuesta';
+    try{
+        await this.respuestaModel.create( createEncuestaResDto );
+      return {
+        ok: true,
+        msg: 'Se ha aguardado correctamente su respuesta'
+      }
+    }catch (error){
+      this.handleExceptions(error);
+    }
+
   }
 
-  createRespuesta(createEncuestaResDto: CreateEncuestaResDto) {
-    return 'This action adds a new encuesta';
+  async findAllquestions(){
+    return this.preguntaModel.find()
   }
 
-  findAll() {
-    return `This action returns all encuesta`;
+  private handleExceptions( error:any ){
+    console.log(error);
+    throw new InternalServerErrorException('Cant create the product - check server logs')
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} encuesta`;
-  }
 
-  update(id: number, updateEncuestaDto: UpdateEncuestaDto) {
-    return `This action updates a #${id} encuesta`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} encuesta`;
-  }
 }

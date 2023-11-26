@@ -3,7 +3,7 @@ import { EncuestaService } from './encuesta.service';
 import { EncuestaController } from './encuesta.controller';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
-import { Encuesta, encuestaSchema } from './entities/encuesta.entity';
+import { EncuestaPre, encuestaPreSchema } from './entities/encuestaPre.entity';
 import { EncuestaRes, encuestaResSchema } from './entities/encuestaRes.entity';
 
 @Module({
@@ -11,8 +11,8 @@ import { EncuestaRes, encuestaResSchema } from './entities/encuestaRes.entity';
     ConfigModule.forRoot(),
     MongooseModule.forFeature([
       {
-        name: Encuesta.name,
-        schema: encuestaSchema
+        name: EncuestaPre.name,
+        schema: encuestaPreSchema
       },
       {
         name: EncuestaRes.name,
