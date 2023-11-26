@@ -19,7 +19,12 @@ export class EncuestaService {
   async createRespuesta(createEncuestaResDto: CreateEncuestaResDto) {
 
     try{
-        await this.respuestaModel.create( createEncuestaResDto );
+        const respuestas = createEncuestaResDto.respuestas.map((item) => ({
+          preguntaId: item.preguntaId,
+          respuesta: item.respuesta,
+        }));
+        await this.respuestaModel.create( respuestas );
+        
       return {
         ok: true,
         msg: 'Se ha aguardado correctamente su respuesta'
@@ -30,14 +35,16 @@ export class EncuestaService {
 
   }
 
-  async findAllquestions(){
-    return this.preguntaModel.find()
-  }
-
   private handleExceptions( error:any ){
     console.log(error);
     throw new InternalServerErrorException('Cant create the product - check server logs')
   }
+
+  async findAllquestions(){
+    return this.preguntaModel.find()
+  }
+
+  
 
 
 }
